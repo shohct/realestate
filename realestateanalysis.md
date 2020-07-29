@@ -23,9 +23,9 @@ one-bedroom apartments and two-bedroom apartments.
 The plot below shows that while both the asking and sold price of
 2-bedroom condos are higher than 1-bedroom condos, when divided by sqft,
 the price per sqft is lower for 2-bedroom condos. This is mostly
-contributed by 2-bedroom condos having a higher square footage than
-1-bedrooms (on average, 2-bedroom condos are 187.17 sqft larger than
-1-bedroom condos.)
+contributed by 2-bedroom condos having an overall higher square footage
+than 1-bedrooms (on average, 2-bedroom condos are 187.17 sqft larger
+than 1-bedroom condos.)
 
 <table class="kable_wrapper">
 
