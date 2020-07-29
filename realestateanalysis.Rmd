@@ -2,7 +2,7 @@
 title: "Real Estate Analysis"
 author: "sho"
 date: "7/28/2020"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-```{r data, include = FALSE}
+```{r data, include = FALSE, message = FALSE}
 
 # Read data from Github to conduct analysis
 
@@ -28,6 +28,8 @@ data <- read_csv(url)
 ## Preliminary EDA on real estate data
 
 ```{r EDA, echo = FALSE}
+# Show data
+print(data)
 
 # Text review
 data %>% 
