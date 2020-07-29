@@ -1,0 +1,43 @@
+---
+title: "Real Estate Analysis"
+author: "sho"
+date: "7/28/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r data, include = FALSE}
+
+# Read data from Github to conduct analysis
+
+library(RCurl)
+library(readr)
+library(dplyr)
+library(purrr)
+
+url <- getURL("https://raw.githubusercontent.com/shohct/realestate/master/RealestateData.csv")
+data <- read_csv(url)
+```
+
+## Preliminary EDA on real estate data
+
+```{r EDA, echo = FALSE}
+data %>% 
+  select(SoldPrice, AskingPrice, Bed, Sqft, Age, DaysOnMarket, PriceSqft) %>% 
+  split(.$Bed) %>% 
+  map(summary)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
