@@ -20,31 +20,48 @@ library(dplyr)
 library(purrr)
 library(ggplot2)
 library(tidyr)
+library(knitr)
 
 url <- getURL("https://raw.githubusercontent.com/shohct/realestate/master/RealestateData.csv")
 data <- read_csv(url)
 ```
 
-## Preliminary EDA on real estate data
+### Preliminary EDA on real estate data
+
+The data used for this analysis was manually entered by the author obtained from https://www.zealty.ca/.
+```{r preview, echo = FALSE}
+# Preview data
+kable(head(data, 5))
+
+sqftdiff <- round(colMeans(subset(data, Bed == 2, select = Sqft)) - colMeans(subset(data, Bed == 1, select = Sqft)), 2)
+```
+
+Summary statistics on sold price, asking price, price per sqft, sqft, age, and # of days on market were examined and compared between one-bedroom apartments and two-bedroom apartments. 
+
+The plot below shows that while both the asking and sold price of 2-bedroom condos are higher than 1-bedroom condos, when divided by sqft, the price per sqft is lower for 2-bedroom condos. This is mostly contributed by 2-bedroom condos having an overall higher square footage than 1-bedrooms (on average, 2-bedroom condos are `r sqftdiff` sqft larger than 1-bedroom condos.)
 
 ```{r EDA, echo = FALSE}
-# Show data
-print(data)
-
 # Text review
-data %>% 
+kable(data %>% 
   select(SoldPrice, AskingPrice, Bed, Sqft, Age, DaysOnMarket, PriceSqft) %>% 
   split(.$Bed) %>% 
-  map(summary)
+  map(summary))
 
-# Plot it
+# Plot it - need to pivot data from wide to long to use facet_wrap for all y values
 data %>% 
-  mutate(Bed = factor(Bed)) %>% 
+  mutate(Bed = factor(Bed, labels = c("1-Bed", "2-Bed"))) %>% 
   pivot_longer(cols = c(SoldPrice, AskingPrice, Sqft, Age, DaysOnMarket, PriceSqft),
                names_to = "DataType",
                values_to = "Value") %>% 
   ggplot(aes(Bed, Value)) +
   geom_boxplot(aes(fill = Bed)) +
-  facet_wrap(~DataType, scales = "free_y")
+  facet_wrap(~DataType, scales = "free_y") +
+  scale_y_continuous(labels = scales::comma) +
+  ggtitle("Comparison of multiple variables between 1-Bed and 2-Bed Condos") +
+  ylab("") +
+  xlab("") +
+  labs(fill = "# of Bedrooms")
+  
 ```
+
 
