@@ -70,7 +70,11 @@ data %>%
 ```
 
 The difference between asking and sold price is investigated further to identify appropriate negotiation range. Considering there are some new apartments in the data that could only be sold at asking price, those were excluded in the following analysis.
-```{r bargaindiff, echo = FALSE, message = FALSE, fig.height = 6, fig.width = 10}
+
+Initial review of the data found minimal correlations between different real estate variables and the bargained difference. The only variable showing slightly higher correlation is asking price of 2-bedroom condos.
+
+An observation of interest is an initial positive correlation between the number of days on market and bargained difference was noted, but the effect flattens after the apartment has been on the market for over 30 days. This observation is found for both 1-bedroom and 2-bedroom apartments. 
+```{r bargaindiff, echo = FALSE, message = FALSE, fig.height = 10, fig.width = 10}
 
 kable(data %>% 
   filter(Age != 0) %>% 
@@ -98,6 +102,10 @@ data %>%
   xlab("") +
   labs(fill = "# of Bedrooms") +
   theme(legend.position = "top",
-        legend.justification = 'left')
-  
+        legend.justification = 'left') +
+  theme_minimal()
+
+# Correlation
+#pairs(~bargaindiff+AskingPrice+SoldPrice+Sqft+PriceSqft+DaysOnMarket, data = data, main = "test")
+#cor(data$AskingPrice, data$bargaindiff)
 ```

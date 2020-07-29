@@ -66,6 +66,16 @@ identify appropriate negotiation range. Considering there are some new
 apartments in the data that could only be sold at asking price, those
 were excluded in the following analysis.
 
+Initial review of the data found minimal correlations between different
+real estate variables and the bargained difference. The only variable
+showing slightly higher correlation is asking price of 2-bedroom condos.
+
+An observation of interest is an initial positive correlation between
+the number of days on market and bargained difference was noted, but the
+effect flattens after the apartment has been on the market for over 30
+days. This observation is found for both 1-bedroom and 2-bedroom
+apartments.
+
 | Bed |  AvgDiff | MedianDiff | MinDiff | MaxDiff |
 | --: | -------: | ---------: | ------: | ------: |
 |   1 | 15403.77 |      14450 | \-58000 |  137000 |
