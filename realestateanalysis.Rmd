@@ -18,6 +18,8 @@ library(RCurl)
 library(readr)
 library(dplyr)
 library(purrr)
+library(ggplot2)
+library(tidyr)
 
 url <- getURL("https://raw.githubusercontent.com/shohct/realestate/master/RealestateData.csv")
 data <- read_csv(url)
@@ -26,18 +28,21 @@ data <- read_csv(url)
 ## Preliminary EDA on real estate data
 
 ```{r EDA, echo = FALSE}
+
+# Text review
 data %>% 
   select(SoldPrice, AskingPrice, Bed, Sqft, Age, DaysOnMarket, PriceSqft) %>% 
   split(.$Bed) %>% 
   map(summary)
+
+# Plot it
+data %>% 
+  mutate(Bed = factor(Bed)) %>% 
+  pivot_longer(cols = c(SoldPrice, AskingPrice, Sqft, Age, DaysOnMarket, PriceSqft),
+               names_to = "DataType",
+               values_to = "Value") %>% 
+  ggplot(aes(Bed, Value)) +
+  geom_boxplot(aes(fill = Bed)) +
+  facet_wrap(~DataType, scales = "free_y")
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
