@@ -21,9 +21,13 @@ library(purrr)
 library(ggplot2)
 library(tidyr)
 library(knitr)
+library(reshape2)
 
 url <- getURL("https://raw.githubusercontent.com/shohct/realestate/master/RealestateData.csv")
 data <- read_csv(url)
+
+data <- data %>% 
+    mutate(bargaindiff = AskingPrice - SoldPrice)
 ```
 
 ### Preliminary EDA on real estate data
@@ -42,10 +46,10 @@ The plot below shows that while both the asking and sold price of 2-bedroom cond
 
 ```{r EDA, echo = FALSE, fig.height = 6, fig.width = 10}
 # Text review
-kable(data %>% 
+data %>% 
   select(SoldPrice, AskingPrice, Bed, Sqft, Age, DaysOnMarket, PriceSqft) %>% 
   split(.$Bed) %>% 
-  map(summary))
+  map(summary)
 
 # Plot it - need to pivot data from wide to long to use facet_wrap for all y values
 data %>% 
@@ -65,4 +69,35 @@ data %>%
         legend.justification = 'left')
 ```
 
+The difference between asking and sold price is investigated further to identify appropriate negotiation range. Considering there are some new apartments in the data that could only be sold at asking price, those were excluded in the following analysis.
+```{r bargaindiff, echo = FALSE, message = FALSE, fig.height = 6, fig.width = 10}
 
+kable(data %>% 
+  filter(Age != 0) %>% 
+  group_by(Bed) %>% 
+  summarize(AvgDiff = mean(bargaindiff),
+            MedianDiff = median(bargaindiff),
+            MinDiff = min(bargaindiff),
+            MaxDiff = max(bargaindiff)))
+
+# Test what are potential factors that impact bargaining differences
+
+data %>% 
+  filter(Age != 0) %>% 
+  mutate(Bed = as.character(Bed)) %>% 
+  melt(id.vars = c("Bed", "bargaindiff"), 
+       measure.vars = c("SoldPrice", "AskingPrice", "Age", "Sqft", "PriceSqft", "DaysOnMarket")) %>% 
+  ggplot(aes(value, bargaindiff, col = Bed)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(se = FALSE) +
+  facet_wrap(~variable, scales = "free_x", ncol = 2) +
+  scale_x_continuous(labels = scales::comma) +
+  scale_y_continuous(labels = scales::label_dollar()) +
+  ggtitle("Relationships between Asking-Sold Price differences and other variables") +
+  ylab("Asking - Sold Difference") +
+  xlab("") +
+  labs(fill = "# of Bedrooms") +
+  theme(legend.position = "top",
+        legend.justification = 'left')
+  
+```
