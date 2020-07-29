@@ -40,7 +40,7 @@ Summary statistics on sold price, asking price, price per sqft, sqft, age, and #
 
 The plot below shows that while both the asking and sold price of 2-bedroom condos are higher than 1-bedroom condos, when divided by sqft, the price per sqft is lower for 2-bedroom condos. This is mostly contributed by 2-bedroom condos having an overall higher square footage than 1-bedrooms (on average, 2-bedroom condos are `r sqftdiff` sqft larger than 1-bedroom condos.)
 
-```{r EDA, echo = FALSE}
+```{r EDA, echo = FALSE, fig.height = 6, fig.width = 10}
 # Text review
 kable(data %>% 
   select(SoldPrice, AskingPrice, Bed, Sqft, Age, DaysOnMarket, PriceSqft) %>% 
@@ -57,11 +57,12 @@ data %>%
   geom_boxplot(aes(fill = Bed)) +
   facet_wrap(~DataType, scales = "free_y") +
   scale_y_continuous(labels = scales::comma) +
-  ggtitle("Comparison of multiple variables between 1-Bed and 2-Bed Condos") +
+  ggtitle("Comparison of multiple variables between 1-Bed and 2-Bed apartments") +
   ylab("") +
   xlab("") +
-  labs(fill = "# of Bedrooms")
-  
+  labs(fill = "# of Bedrooms") +
+  theme(legend.position = "top",
+        legend.justification = 'left')
 ```
 
 
