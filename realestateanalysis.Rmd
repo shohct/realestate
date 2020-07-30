@@ -27,7 +27,8 @@ url <- getURL("https://raw.githubusercontent.com/shohct/realestate/master/Reales
 data <- read_csv(url)
 
 data <- data %>% 
-    mutate(bargaindiff = AskingPrice - SoldPrice)
+    mutate(bargaindiff = AskingPrice - SoldPrice,
+           SoldDate = as.Date(SoldDate, "%m/%d/%Y"))
 ```
 
 ### Preliminary EDA on real estate data
@@ -73,7 +74,7 @@ The difference between asking and sold price is investigated further to identify
 
 Initial review of the data found minimal correlations between different real estate variables and the bargained difference. The only variable showing slightly higher correlation is asking price of 2-bedroom condos.
 
-An observation of interest is an initial positive correlation between the number of days on market and bargained difference was noted, but the effect flattens after the apartment has been on the market for over 30 days. This observation is found for both 1-bedroom and 2-bedroom apartments. 
+A logarithmic growth between the number of days on market and bargained difference was noted, where the curve flattens after approximately 30 days on the market. This observation is found for both 1-bedroom and 2-bedroom apartments.
 ```{r bargaindiff, echo = FALSE, message = FALSE, fig.height = 10, fig.width = 10}
 
 kable(data %>% 
@@ -104,6 +105,47 @@ data %>%
   theme(legend.position = "top",
         legend.justification = 'left') +
   theme_minimal()
+```
+
+``` {r marketxdiffplot, echo = FALSE, message = FALSE, fig.width = 10}
+data %>% 
+  filter(Age != 0) %>% 
+  mutate(Bed = as.character(Bed)) %>% 
+  melt(id.vars = c("Bed", "bargaindiff"), 
+       measure.vars = c("DaysOnMarket")) %>% 
+  ggplot(aes(value, bargaindiff, col = Bed)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(se = FALSE) +
+  facet_wrap(~variable, scales = "free_x", ncol = 2) +
+  scale_x_continuous(labels = scales::comma, breaks = seq(0, max(data$DaysOnMarket) + 10, by = 10)) +
+  scale_y_continuous(labels = scales::label_dollar()) +
+  ggtitle("Relationships between Asking-Sold Price differences and # of Days on Market") +
+  ylab("Asking - Sold Difference") +
+  xlab("") +
+  labs(fill = "# of Bedrooms") +
+  theme_light() + 
+  theme(legend.position = "top",
+        legend.justification = 'left',
+        panel.grid.minor.x = element_blank()) +
+  geom_vline(xintercept = 30, linetype = "dashed", colour = "green4", size=1)
+```
+
+### Impact of COVID on Real Estate Market
+```{r timeseries, echo = FALSE}
+
+data %>% 
+  filter(strftime(SoldDate, format = "%Y") == 2020) %>% 
+  mutate(soldweek = strftime(SoldDate, format = "%V")) %>% 
+  group_by(soldweek) %>% 
+  count() %>% 
+  ggplot(aes(soldweek, n)) +
+  geom_line()
+  pivot_longer(cols = c(SoldPrice, AskingPrice, DaysOnMarket, bargaindiff), 
+               names_to = "DataType",
+               values_to = "Value") %>% 
+  ggplot(aes(soldweek, Value, fill = Bed)) +
+  geom_line() +
+  facet_wrap(~DataType)
 
 # Correlation
 #pairs(~bargaindiff+AskingPrice+SoldPrice+Sqft+PriceSqft+DaysOnMarket, data = data, main = "test")
