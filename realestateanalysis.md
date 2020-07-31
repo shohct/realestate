@@ -8,13 +8,509 @@ sho
 The data used for this analysis was manually entered by the author
 obtained from <https://www.zealty.ca/>.
 
-| Unit | Address             | SoldPrice | AskingPrice | Bed | Bath | Sqft | Age | SoldDate  | DaysOnMarket | PriceSqft | Floor | bargaindiff |
-| ---: | :------------------ | --------: | ----------: | --: | ---: | ---: | --: | :-------- | -----------: | --------: | ----: | ----------: |
-|  323 | 9288 Odlin Road     |    565700 |      588000 |   2 |    2 |  897 |  11 | 7/13/2020 |            6 |  630.6577 |     3 |       22300 |
-| 1205 | 7488 Lansdowne Road |    733000 |      768000 |   2 |    2 |  878 |   3 | 7/17/2020 |           21 |  834.8519 |    12 |       35000 |
-|  417 | 23233 Gilley Road   |    525000 |      558888 |   2 |    2 |  850 |   0 | 4/1/2020  |          160 |  617.6471 |     4 |       33888 |
-|  307 | 8033 Saba Road      |    595000 |      629000 |   2 |    2 |  862 |  10 | 7/8/2020  |           93 |  690.2552 |     3 |       34000 |
-|  601 | 10155 River Drive   |    502500 |      509000 |   2 |    2 |  752 |   6 | 3/10/2020 |            7 |  668.2181 |     6 |        6500 |
+<table>
+
+<thead>
+
+<tr>
+
+<th style="text-align:right;">
+
+Unit
+
+</th>
+
+<th style="text-align:left;">
+
+Address
+
+</th>
+
+<th style="text-align:right;">
+
+SoldPrice
+
+</th>
+
+<th style="text-align:right;">
+
+AskingPrice
+
+</th>
+
+<th style="text-align:right;">
+
+Bed
+
+</th>
+
+<th style="text-align:right;">
+
+Bath
+
+</th>
+
+<th style="text-align:right;">
+
+Sqft
+
+</th>
+
+<th style="text-align:right;">
+
+Age
+
+</th>
+
+<th style="text-align:left;">
+
+SoldDate
+
+</th>
+
+<th style="text-align:right;">
+
+DaysOnMarket
+
+</th>
+
+<th style="text-align:right;">
+
+PriceSqft
+
+</th>
+
+<th style="text-align:right;">
+
+Floor
+
+</th>
+
+<th style="text-align:right;">
+
+bargaindiff
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:right;">
+
+323
+
+</td>
+
+<td style="text-align:left;">
+
+9288 Odlin Road
+
+</td>
+
+<td style="text-align:right;">
+
+565700
+
+</td>
+
+<td style="text-align:right;">
+
+588000
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+897
+
+</td>
+
+<td style="text-align:right;">
+
+11
+
+</td>
+
+<td style="text-align:left;">
+
+2020-07-13
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+<td style="text-align:right;">
+
+630.6577
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+<td style="text-align:right;">
+
+22300
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+1205
+
+</td>
+
+<td style="text-align:left;">
+
+7488 Lansdowne Road
+
+</td>
+
+<td style="text-align:right;">
+
+733000
+
+</td>
+
+<td style="text-align:right;">
+
+768000
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+878
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+<td style="text-align:left;">
+
+2020-07-17
+
+</td>
+
+<td style="text-align:right;">
+
+21
+
+</td>
+
+<td style="text-align:right;">
+
+834.8519
+
+</td>
+
+<td style="text-align:right;">
+
+12
+
+</td>
+
+<td style="text-align:right;">
+
+35000
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+417
+
+</td>
+
+<td style="text-align:left;">
+
+23233 Gilley Road
+
+</td>
+
+<td style="text-align:right;">
+
+525000
+
+</td>
+
+<td style="text-align:right;">
+
+558888
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+850
+
+</td>
+
+<td style="text-align:right;">
+
+0
+
+</td>
+
+<td style="text-align:left;">
+
+2020-04-01
+
+</td>
+
+<td style="text-align:right;">
+
+160
+
+</td>
+
+<td style="text-align:right;">
+
+617.6471
+
+</td>
+
+<td style="text-align:right;">
+
+4
+
+</td>
+
+<td style="text-align:right;">
+
+33888
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+307
+
+</td>
+
+<td style="text-align:left;">
+
+8033 Saba Road
+
+</td>
+
+<td style="text-align:right;">
+
+595000
+
+</td>
+
+<td style="text-align:right;">
+
+629000
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+862
+
+</td>
+
+<td style="text-align:right;">
+
+10
+
+</td>
+
+<td style="text-align:left;">
+
+2020-07-08
+
+</td>
+
+<td style="text-align:right;">
+
+93
+
+</td>
+
+<td style="text-align:right;">
+
+690.2552
+
+</td>
+
+<td style="text-align:right;">
+
+3
+
+</td>
+
+<td style="text-align:right;">
+
+34000
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+601
+
+</td>
+
+<td style="text-align:left;">
+
+10155 River Drive
+
+</td>
+
+<td style="text-align:right;">
+
+502500
+
+</td>
+
+<td style="text-align:right;">
+
+509000
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+752
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+<td style="text-align:left;">
+
+2020-03-10
+
+</td>
+
+<td style="text-align:right;">
+
+7
+
+</td>
+
+<td style="text-align:right;">
+
+668.2181
+
+</td>
+
+<td style="text-align:right;">
+
+6
+
+</td>
+
+<td style="text-align:right;">
+
+6500
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 Summary statistics on sold price, asking price, price per sqft, sqft,
 age, and \# of days on market were examined and compared between
@@ -70,15 +566,137 @@ Initial review of the data found minimal correlations between different
 real estate variables and the bargained difference. The only variable
 showing slightly higher correlation is asking price of 2-bedroom condos.
 
-An observation of interest is an initial positive correlation between
-the number of days on market and bargained difference was noted, but the
-effect flattens after the apartment has been on the market for over 30
-days. This observation is found for both 1-bedroom and 2-bedroom
-apartments.
+A logarithmic growth between the number of days on market and bargained
+difference was noted, where the curve flattens after approximately 30
+days on the market. This observation is found for both 1-bedroom and
+2-bedroom apartments.
 
-| Bed |  AvgDiff | MedianDiff | MinDiff | MaxDiff |
-| --: | -------: | ---------: | ------: | ------: |
-|   1 | 15403.77 |      14450 | \-58000 |  137000 |
-|   2 | 25377.65 |      20500 | \-60000 |  144000 |
+<table>
 
-![](realestateanalysis_files/figure-gfm/bargaindiff-1.png)<!-- -->
+<thead>
+
+<tr>
+
+<th style="text-align:right;">
+
+Bed
+
+</th>
+
+<th style="text-align:right;">
+
+AvgDiff
+
+</th>
+
+<th style="text-align:right;">
+
+MedianDiff
+
+</th>
+
+<th style="text-align:right;">
+
+MinDiff
+
+</th>
+
+<th style="text-align:right;">
+
+MaxDiff
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:right;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+15403.77
+
+</td>
+
+<td style="text-align:right;">
+
+14450
+
+</td>
+
+<td style="text-align:right;">
+
+\-58000
+
+</td>
+
+<td style="text-align:right;">
+
+137000
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:right;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+25377.65
+
+</td>
+
+<td style="text-align:right;">
+
+20500
+
+</td>
+
+<td style="text-align:right;">
+
+\-60000
+
+</td>
+
+<td style="text-align:right;">
+
+144000
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+![](realestateanalysis_files/figure-gfm/%7Br%20bargaindiff-1.png)<!-- -->
+
+![](realestateanalysis_files/figure-gfm/marketxdiffplot-1.png)<!-- -->
+
+### Impact of COVID on Real Estate Market
+
+While the data collected from zelaty.ca is not exhaustive of all sales
+transactions occurring, a clear decline in the number of sales was
+observed starting at week 12 (week of March 16). March 17th marked the
+day B.C. declared state of emergency due to COVID-19. Sales transactions
+started ot pick up once again around week 20 (week of May 10). This
+pattern was not observed in the weekly average sold price. \[test mean
+before & after later…\]
+
+![](realestateanalysis_files/figure-gfm/timeseries-1.png)<!-- -->![](realestateanalysis_files/figure-gfm/timeseries-2.png)<!-- -->

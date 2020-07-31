@@ -21,6 +21,7 @@ library(purrr)
 library(ggplot2)
 library(tidyr)
 library(knitr)
+library(kableExtra)
 library(reshape2)
 
 url <- getURL("https://raw.githubusercontent.com/shohct/realestate/master/RealestateData.csv")
@@ -75,8 +76,8 @@ The difference between asking and sold price is investigated further to identify
 Initial review of the data found minimal correlations between different real estate variables and the bargained difference. The only variable showing slightly higher correlation is asking price of 2-bedroom condos.
 
 A logarithmic growth between the number of days on market and bargained difference was noted, where the curve flattens after approximately 30 days on the market. This observation is found for both 1-bedroom and 2-bedroom apartments.
-```{r bargaindiff, echo = FALSE, message = FALSE, fig.height = 10, fig.width = 10}
 
+```{r {r bargaindiff, echo = FALSE, message = FALSE, fig.height = 10, fig.width = 10}
 kable(data %>% 
   filter(Age != 0) %>% 
   group_by(Bed) %>% 
@@ -127,27 +128,57 @@ data %>%
   theme(legend.position = "top",
         legend.justification = 'left',
         panel.grid.minor.x = element_blank()) +
-  geom_vline(xintercept = 30, linetype = "dashed", colour = "green4", size=1)
+  geom_vline(xintercept = 30, linetype = "dashed", colour = "green4", size = 1)
 ```
 
 ### Impact of COVID on Real Estate Market
-```{r timeseries, echo = FALSE}
+
+While the data collected from zelaty.ca is not exhaustive of all sales transactions occurring, a clear decline in the number of sales was observed starting at week 12 (week of March 16). March 17th marked the day B.C. declared state of emergency due to COVID-19. Sales transactions started ot pick up once again around week 20 (week of May 10). This pattern was not observed in the weekly average sold price. [test mean before & after later...]
+
+```{r timeseries, echo = FALSE, message = FALSE, fig.width=10}
 
 data %>% 
   filter(strftime(SoldDate, format = "%Y") == 2020) %>% 
-  mutate(soldweek = strftime(SoldDate, format = "%V")) %>% 
-  group_by(soldweek) %>% 
+  mutate(soldweek = strftime(SoldDate, format = "%V"),
+         Bed = as.character(Bed)) %>% 
+  group_by(soldweek, Bed) %>% 
   count() %>% 
-  ggplot(aes(soldweek, n)) +
-  geom_line()
-  pivot_longer(cols = c(SoldPrice, AskingPrice, DaysOnMarket, bargaindiff), 
-               names_to = "DataType",
-               values_to = "Value") %>% 
-  ggplot(aes(soldweek, Value, fill = Bed)) +
-  geom_line() +
-  facet_wrap(~DataType)
+  ggplot() +
+  geom_col(aes(soldweek, n, fill = Bed)) +
+  ggtitle("Weekly Condo Sales in 2020") +
+  xlab("Week") +
+  ylab("Number of Condos Sold") +
+  labs(fill = "# of Bedrooms") +
+  theme_light() +
+  theme(legend.position = "top",
+        legend.justification = "left",
+        panel.grid.minor = element_blank(),
+        panel.grid.major.x = element_blank()) +
+  geom_vline(xintercept = "12", linetype = "dashed", colour = "gray45", size = 1) +
+  annotate("text", x = "17", y = 28, label = "Start of shutdown measures in B.C. (Mar 17)", colour = "gray45")
+
+data %>% 
+  filter(strftime(SoldDate, format = "%Y") == 2020) %>% 
+  mutate(soldweek = strftime(SoldDate, format = "%V"),
+         Bed = as.character(Bed)) %>% 
+  group_by(soldweek, Bed) %>% 
+  summarize(meanprice = mean(SoldPrice))  %>% 
+  ggplot(aes(soldweek, meanprice, group = Bed, colour = Bed), size = 1.5) +
+  geom_point(stat = 'summary', fun = mean) +
+  stat_summary(fun = mean, geom="line") +
+  scale_y_continuous(labels = scales::label_dollar()) + 
+  ggtitle("Weekly Average Sold Price in 2020") +
+  xlab("Week") +
+  ylab("Mean Sold Price") +
+  labs(colour = "# of Bedrooms") +
+  theme_light() +
+  theme(legend.position = "top",
+        legend.justification = "left") +
+  geom_vline(xintercept = "12", linetype = "dashed", colour = "gray45", size = 1) +
+  annotate("text", x = "17", y = 800000, label = "Start of shutdown measures in B.C. (Mar 17)", colour = "gray45")
 
 # Correlation
 #pairs(~bargaindiff+AskingPrice+SoldPrice+Sqft+PriceSqft+DaysOnMarket, data = data, main = "test")
 #cor(data$AskingPrice, data$bargaindiff)
+
 ```
