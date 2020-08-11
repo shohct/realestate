@@ -23,6 +23,7 @@ library(tidyr)
 library(knitr)
 library(kableExtra)
 library(reshape2)
+library(ggmap)
 
 url <- getURL("https://raw.githubusercontent.com/shohct/realestate/master/RealestateData.csv")
 data <- read_csv(url)
@@ -232,4 +233,22 @@ data %>%
   subset(PrePostCOVID == "PostCOVID", SoldPrice, drop = TRUE) -> post_1
 
 t.test(pre_1, post_1, paired = TRUE)
+```
+
+```{r mapping, echo = FALSE}
+
+# Add city, province, and country to address for geocoding
+mapdata <- data %>% 
+  mutate(Address = paste0(Address, ", Richmond, BC, Canada"))
+
+# Geocode function
+
+getGeocode <- function(address) {
+  # use geocode function to query Google servers
+  geo_reply = geocode(address, output = 'all', messaging = TRUE, override_limit = TRUE)
+  # Extract the bits that we need from the returned list
+  response = data.frame(lat = NA, long = NA, accuracy = NA, formatted_address = NA, address_type = NA, status = NA)
+  response$status <- geo_reply$status
+}
+
 ```
