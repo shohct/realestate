@@ -51,7 +51,10 @@ The plot below shows that while both the asking and sold price of 2-bedroom cond
 data %>% 
   select(SoldPrice, AskingPrice, Bed, Sqft, Age, DaysOnMarket, PriceSqft) %>% 
   split(.$Bed) %>% 
-  map(summary)
+  map(summary) %>% 
+  map(kable, booktabs = T) %>% 
+  map(kable_styling) %>% 
+  walk(print)
 
 # Plot it - need to pivot data from wide to long to use facet_wrap for all y values
 data %>% 
@@ -133,10 +136,12 @@ data %>%
 
 ### Impact of COVID on Real Estate Market
 
-While the data collected from zelaty.ca is not exhaustive of all sales transactions occurring, a clear decline in the number of sales was observed starting at week 12 (week of March 16). March 17th marked the day B.C. declared state of emergency due to COVID-19. Sales transactions started ot pick up once again around week 20 (week of May 10). This pattern was not observed in the weekly average sold price. [test mean before & after later...]
+While the data collected from zealty.ca is not exhaustive of all sales transactions occurring, a clear decline in the number of sales was observed starting at week 12 (week of March 16). March 17th marked the day B.C. declared state of emergency due to COVID-19. Sales transactions started to pick up once again around week 20 (week of May 10). This pattern was not observed in the weekly average sold price. 
+
 
 ```{r timeseries, echo = FALSE, message = FALSE, fig.width=10}
 
+# Number of weekly condo sales
 data %>% 
   filter(strftime(SoldDate, format = "%Y") == 2020) %>% 
   mutate(soldweek = strftime(SoldDate, format = "%V"),
@@ -157,6 +162,7 @@ data %>%
   geom_vline(xintercept = "12", linetype = "dashed", colour = "gray45", size = 1) +
   annotate("text", x = "17", y = 28, label = "Start of shutdown measures in B.C. (Mar 17)", colour = "gray45")
 
+# Weekly average sold price
 data %>% 
   filter(strftime(SoldDate, format = "%Y") == 2020) %>% 
   mutate(soldweek = strftime(SoldDate, format = "%V"),
@@ -176,9 +182,57 @@ data %>%
         legend.justification = "left") +
   geom_vline(xintercept = "12", linetype = "dashed", colour = "gray45", size = 1) +
   annotate("text", x = "17", y = 800000, label = "Start of shutdown measures in B.C. (Mar 17)", colour = "gray45")
+```
 
-# Correlation
-#pairs(~bargaindiff+AskingPrice+SoldPrice+Sqft+PriceSqft+DaysOnMarket, data = data, main = "test")
-#cor(data$AskingPrice, data$bargaindiff)
+A more in-depth comparison between pre and post COVID sold price was examined and no significant changes were observed for either one bedroom or two bedroom. 
 
+```{r boxprepost, echo = FALSE, fig.width=10}
+
+# Boxplot of sold price between pre & post COVID
+data %>% 
+  filter(Age != 0) %>% 
+  mutate(Bed = factor(Bed, labels = c("1-Bed", "2-Bed")),
+         PrePostCOVID = factor(ifelse(SoldDate >= '2020-03-17', "PostCOVID", "PreCOVID"), 
+                               levels=c("PreCOVID", "PostCOVID"))) %>% 
+  ggplot(aes(Bed, SoldPrice)) +
+  geom_boxplot(aes(fill = PrePostCOVID)) +
+  scale_y_continuous(labels = scales::comma) +
+  scale_fill_manual(values = c("#999999", "#E69F00")) +
+  ggtitle("Sold Price Comparison - Pre & Post-COVID") +
+  ylab("Sold Price ($)") +
+  xlab("") +
+  labs(fill = "") +
+  theme(legend.position = "top",
+        legend.justification = 'left')
+
+set.seed(10)
+
+data %>% 
+  mutate(PrePostCOVID = ifelse(SoldDate >= '2020-03-17', "PostCOVID", "PreCOVID")) %>% 
+  filter(Age != 0 & Bed == 2 & PrePostCOVID == "PreCOVID") %>% 
+  sample_n(56) %>% 
+  subset(PrePostCOVID == "PreCOVID", SoldPrice, drop = TRUE) -> pre_2
+
+
+data %>% 
+  mutate(PrePostCOVID = ifelse(SoldDate >= '2020-03-17', "PostCOVID", "PreCOVID")) %>% 
+  filter(Age != 0 & Bed == 2 & PrePostCOVID == "PostCOVID") %>% 
+  subset(PrePostCOVID == "PostCOVID", SoldPrice, drop = TRUE) -> post_2
+
+t.test(pre_2, post_2, paired = TRUE)
+
+# For 1 bedroom - there is only 68 PreCOVID listings vs 74 PostCOVID, will take random sample of PostCOVID
+data %>% 
+  mutate(PrePostCOVID = ifelse(SoldDate >= '2020-03-17', "PostCOVID", "PreCOVID")) %>% 
+  filter(Age != 0 & Bed == 1 & PrePostCOVID == "PreCOVID") %>%
+  subset(PrePostCOVID == "PreCOVID", SoldPrice, drop = TRUE) -> pre_1
+
+
+data %>% 
+  mutate(PrePostCOVID = ifelse(SoldDate >= '2020-03-17', "PostCOVID", "PreCOVID")) %>% 
+  filter(Age != 0 & Bed == 1 & PrePostCOVID == "PostCOVID") %>% 
+  sample_n(68) %>% 
+  subset(PrePostCOVID == "PostCOVID", SoldPrice, drop = TRUE) -> post_1
+
+t.test(pre_1, post_1, paired = TRUE)
 ```
