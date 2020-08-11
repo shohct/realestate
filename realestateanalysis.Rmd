@@ -34,7 +34,7 @@ data <- data %>%
 
 ### Preliminary EDA on real estate data
 
-The data used for this analysis was manually entered by the author obtained from https://www.zealty.ca/.
+The data used for this analysis was manually entered by the author obtained from https://www.zealty.ca/ (example below)
 ```{r preview, echo = FALSE}
 # Preview data
 kable(head(data, 5))
@@ -48,13 +48,10 @@ The plot below shows that while both the asking and sold price of 2-bedroom cond
 
 ```{r EDA, echo = FALSE, fig.height = 6, fig.width = 10}
 # Text review
-data %>% 
+kable(data %>% 
   select(SoldPrice, AskingPrice, Bed, Sqft, Age, DaysOnMarket, PriceSqft) %>% 
   split(.$Bed) %>% 
-  map(summary) %>% 
-  map(kable, booktabs = T) %>% 
-  map(kable_styling) %>% 
-  walk(print)
+  map(summary))
 
 # Plot it - need to pivot data from wide to long to use facet_wrap for all y values
 data %>% 

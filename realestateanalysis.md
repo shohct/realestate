@@ -523,158 +523,749 @@ contributed by 2-bedroom condos having an overall higher square footage
 than 1-bedrooms (on average, 2-bedroom condos are 187.17 sqft larger
 than 1-bedroom condos.)
 
-    ## <table class="table" style="margin-left: auto; margin-right: auto;">
-    ##  <thead>
-    ##   <tr>
-    ##    <th style="text-align:left;">   </th>
-    ##    <th style="text-align:left;">   SoldPrice </th>
-    ##    <th style="text-align:left;">  AskingPrice </th>
-    ##    <th style="text-align:left;">      Bed </th>
-    ##    <th style="text-align:left;">      Sqft </th>
-    ##    <th style="text-align:left;">      Age </th>
-    ##    <th style="text-align:left;">  DaysOnMarket </th>
-    ##    <th style="text-align:left;">   PriceSqft </th>
-    ##   </tr>
-    ##  </thead>
-    ## <tbody>
-    ##   <tr>
-    ##    <td style="text-align:left;">  </td>
-    ##    <td style="text-align:left;"> Min.   :357000 </td>
-    ##    <td style="text-align:left;"> Min.   :361800 </td>
-    ##    <td style="text-align:left;"> Min.   :1 </td>
-    ##    <td style="text-align:left;"> Min.   :475.0 </td>
-    ##    <td style="text-align:left;"> Min.   : 0.000 </td>
-    ##    <td style="text-align:left;"> Min.   :  0.00 </td>
-    ##    <td style="text-align:left;"> Min.   : 103.9 </td>
-    ##   </tr>
-    ##   <tr>
-    ##    <td style="text-align:left;">  </td>
-    ##    <td style="text-align:left;"> 1st Qu.:448000 </td>
-    ##    <td style="text-align:left;"> 1st Qu.:469000 </td>
-    ##    <td style="text-align:left;"> 1st Qu.:1 </td>
-    ##    <td style="text-align:left;"> 1st Qu.:591.0 </td>
-    ##    <td style="text-align:left;"> 1st Qu.: 1.000 </td>
-    ##    <td style="text-align:left;"> 1st Qu.:  5.00 </td>
-    ##    <td style="text-align:left;"> 1st Qu.: 683.5 </td>
-    ##   </tr>
-    ##   <tr>
-    ##    <td style="text-align:left;">  </td>
-    ##    <td style="text-align:left;"> Median :508000 </td>
-    ##    <td style="text-align:left;"> Median :526000 </td>
-    ##    <td style="text-align:left;"> Median :1 </td>
-    ##    <td style="text-align:left;"> Median :646.0 </td>
-    ##    <td style="text-align:left;"> Median : 4.000 </td>
-    ##    <td style="text-align:left;"> Median : 13.00 </td>
-    ##    <td style="text-align:left;"> Median : 786.8 </td>
-    ##   </tr>
-    ##   <tr>
-    ##    <td style="text-align:left;">  </td>
-    ##    <td style="text-align:left;"> Mean   :507398 </td>
-    ##    <td style="text-align:left;"> Mean   :522629 </td>
-    ##    <td style="text-align:left;"> Mean   :1 </td>
-    ##    <td style="text-align:left;"> Mean   :650.3 </td>
-    ##    <td style="text-align:left;"> Mean   : 7.741 </td>
-    ##    <td style="text-align:left;"> Mean   : 31.15 </td>
-    ##    <td style="text-align:left;"> Mean   : 783.1 </td>
-    ##   </tr>
-    ##   <tr>
-    ##    <td style="text-align:left;">  </td>
-    ##    <td style="text-align:left;"> 3rd Qu.:550000 </td>
-    ##    <td style="text-align:left;"> 3rd Qu.:570000 </td>
-    ##    <td style="text-align:left;"> 3rd Qu.:1 </td>
-    ##    <td style="text-align:left;"> 3rd Qu.:711.0 </td>
-    ##    <td style="text-align:left;"> 3rd Qu.:12.000 </td>
-    ##    <td style="text-align:left;"> 3rd Qu.: 41.00 </td>
-    ##    <td style="text-align:left;"> 3rd Qu.: 895.3 </td>
-    ##   </tr>
-    ##   <tr>
-    ##    <td style="text-align:left;">  </td>
-    ##    <td style="text-align:left;"> Max.   :715900 </td>
-    ##    <td style="text-align:left;"> Max.   :715900 </td>
-    ##    <td style="text-align:left;"> Max.   :1 </td>
-    ##    <td style="text-align:left;"> Max.   :795.0 </td>
-    ##    <td style="text-align:left;"> Max.   :38.000 </td>
-    ##    <td style="text-align:left;"> Max.   :194.00 </td>
-    ##    <td style="text-align:left;"> Max.   :1058.2 </td>
-    ##   </tr>
-    ## </tbody>
-    ## </table>
-    ## <table class="table" style="margin-left: auto; margin-right: auto;">
-    ##  <thead>
-    ##   <tr>
-    ##    <th style="text-align:left;">   </th>
-    ##    <th style="text-align:left;">   SoldPrice </th>
-    ##    <th style="text-align:left;">  AskingPrice </th>
-    ##    <th style="text-align:left;">      Bed </th>
-    ##    <th style="text-align:left;">      Sqft </th>
-    ##    <th style="text-align:left;">      Age </th>
-    ##    <th style="text-align:left;">  DaysOnMarket </th>
-    ##    <th style="text-align:left;">   PriceSqft </th>
-    ##   </tr>
-    ##  </thead>
-    ## <tbody>
-    ##   <tr>
-    ##    <td style="text-align:left;">  </td>
-    ##    <td style="text-align:left;"> Min.   :400000 </td>
-    ##    <td style="text-align:left;"> Min.   :438000 </td>
-    ##    <td style="text-align:left;"> Min.   :2 </td>
-    ##    <td style="text-align:left;"> Min.   :709.0 </td>
-    ##    <td style="text-align:left;"> Min.   : 0.000 </td>
-    ##    <td style="text-align:left;"> Min.   :  0.00 </td>
-    ##    <td style="text-align:left;"> Min.   : 455.1 </td>
-    ##   </tr>
-    ##   <tr>
-    ##    <td style="text-align:left;">  </td>
-    ##    <td style="text-align:left;"> 1st Qu.:550000 </td>
-    ##    <td style="text-align:left;"> 1st Qu.:573975 </td>
-    ##    <td style="text-align:left;"> 1st Qu.:2 </td>
-    ##    <td style="text-align:left;"> 1st Qu.:811.0 </td>
-    ##    <td style="text-align:left;"> 1st Qu.: 3.000 </td>
-    ##    <td style="text-align:left;"> 1st Qu.:  9.00 </td>
-    ##    <td style="text-align:left;"> 1st Qu.: 664.2 </td>
-    ##   </tr>
-    ##   <tr>
-    ##    <td style="text-align:left;">  </td>
-    ##    <td style="text-align:left;"> Median :602750 </td>
-    ##    <td style="text-align:left;"> Median :629000 </td>
-    ##    <td style="text-align:left;"> Median :2 </td>
-    ##    <td style="text-align:left;"> Median :845.0 </td>
-    ##    <td style="text-align:left;"> Median : 6.000 </td>
-    ##    <td style="text-align:left;"> Median : 27.00 </td>
-    ##    <td style="text-align:left;"> Median : 727.7 </td>
-    ##   </tr>
-    ##   <tr>
-    ##    <td style="text-align:left;">  </td>
-    ##    <td style="text-align:left;"> Mean   :619565 </td>
-    ##    <td style="text-align:left;"> Mean   :645807 </td>
-    ##    <td style="text-align:left;"> Mean   :2 </td>
-    ##    <td style="text-align:left;"> Mean   :837.5 </td>
-    ##    <td style="text-align:left;"> Mean   : 7.855 </td>
-    ##    <td style="text-align:left;"> Mean   : 43.29 </td>
-    ##    <td style="text-align:left;"> Mean   : 740.5 </td>
-    ##   </tr>
-    ##   <tr>
-    ##    <td style="text-align:left;">  </td>
-    ##    <td style="text-align:left;"> 3rd Qu.:675750 </td>
-    ##    <td style="text-align:left;"> 3rd Qu.:699900 </td>
-    ##    <td style="text-align:left;"> 3rd Qu.:2 </td>
-    ##    <td style="text-align:left;"> 3rd Qu.:870.0 </td>
-    ##    <td style="text-align:left;"> 3rd Qu.:12.000 </td>
-    ##    <td style="text-align:left;"> 3rd Qu.: 57.75 </td>
-    ##    <td style="text-align:left;"> 3rd Qu.: 831.1 </td>
-    ##   </tr>
-    ##   <tr>
-    ##    <td style="text-align:left;">  </td>
-    ##    <td style="text-align:left;"> Max.   :880000 </td>
-    ##    <td style="text-align:left;"> Max.   :989000 </td>
-    ##    <td style="text-align:left;"> Max.   :2 </td>
-    ##    <td style="text-align:left;"> Max.   :900.0 </td>
-    ##    <td style="text-align:left;"> Max.   :38.000 </td>
-    ##    <td style="text-align:left;"> Max.   :229.00 </td>
-    ##    <td style="text-align:left;"> Max.   :1017.3 </td>
-    ##   </tr>
-    ## </tbody>
-    ## </table>
+<table class="kable_wrapper">
+
+<tbody>
+
+<tr>
+
+<td>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+</th>
+
+<th style="text-align:left;">
+
+SoldPrice
+
+</th>
+
+<th style="text-align:left;">
+
+AskingPrice
+
+</th>
+
+<th style="text-align:left;">
+
+Bed
+
+</th>
+
+<th style="text-align:left;">
+
+Sqft
+
+</th>
+
+<th style="text-align:left;">
+
+Age
+
+</th>
+
+<th style="text-align:left;">
+
+DaysOnMarket
+
+</th>
+
+<th style="text-align:left;">
+
+PriceSqft
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+Min. :357000
+
+</td>
+
+<td style="text-align:left;">
+
+Min. :361800
+
+</td>
+
+<td style="text-align:left;">
+
+Min. :1
+
+</td>
+
+<td style="text-align:left;">
+
+Min. :475.0
+
+</td>
+
+<td style="text-align:left;">
+
+Min. : 0.000
+
+</td>
+
+<td style="text-align:left;">
+
+Min. : 0.00
+
+</td>
+
+<td style="text-align:left;">
+
+Min. : 103.9
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+1st Qu.:448000
+
+</td>
+
+<td style="text-align:left;">
+
+1st Qu.:469000
+
+</td>
+
+<td style="text-align:left;">
+
+1st Qu.:1
+
+</td>
+
+<td style="text-align:left;">
+
+1st Qu.:591.0
+
+</td>
+
+<td style="text-align:left;">
+
+1st Qu.: 1.000
+
+</td>
+
+<td style="text-align:left;">
+
+1st Qu.: 5.00
+
+</td>
+
+<td style="text-align:left;">
+
+1st Qu.: 683.5
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+Median :508000
+
+</td>
+
+<td style="text-align:left;">
+
+Median :526000
+
+</td>
+
+<td style="text-align:left;">
+
+Median :1
+
+</td>
+
+<td style="text-align:left;">
+
+Median :646.0
+
+</td>
+
+<td style="text-align:left;">
+
+Median : 4.000
+
+</td>
+
+<td style="text-align:left;">
+
+Median : 13.00
+
+</td>
+
+<td style="text-align:left;">
+
+Median : 786.8
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+Mean :507398
+
+</td>
+
+<td style="text-align:left;">
+
+Mean :522629
+
+</td>
+
+<td style="text-align:left;">
+
+Mean :1
+
+</td>
+
+<td style="text-align:left;">
+
+Mean :650.3
+
+</td>
+
+<td style="text-align:left;">
+
+Mean : 7.741
+
+</td>
+
+<td style="text-align:left;">
+
+Mean : 31.15
+
+</td>
+
+<td style="text-align:left;">
+
+Mean : 783.1
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+3rd Qu.:550000
+
+</td>
+
+<td style="text-align:left;">
+
+3rd Qu.:570000
+
+</td>
+
+<td style="text-align:left;">
+
+3rd Qu.:1
+
+</td>
+
+<td style="text-align:left;">
+
+3rd Qu.:711.0
+
+</td>
+
+<td style="text-align:left;">
+
+3rd Qu.:12.000
+
+</td>
+
+<td style="text-align:left;">
+
+3rd Qu.: 41.00
+
+</td>
+
+<td style="text-align:left;">
+
+3rd Qu.: 895.3
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+Max. :715900
+
+</td>
+
+<td style="text-align:left;">
+
+Max. :715900
+
+</td>
+
+<td style="text-align:left;">
+
+Max. :1
+
+</td>
+
+<td style="text-align:left;">
+
+Max. :795.0
+
+</td>
+
+<td style="text-align:left;">
+
+Max. :38.000
+
+</td>
+
+<td style="text-align:left;">
+
+Max. :194.00
+
+</td>
+
+<td style="text-align:left;">
+
+Max. :1058.2
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</td>
+
+<td>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+</th>
+
+<th style="text-align:left;">
+
+SoldPrice
+
+</th>
+
+<th style="text-align:left;">
+
+AskingPrice
+
+</th>
+
+<th style="text-align:left;">
+
+Bed
+
+</th>
+
+<th style="text-align:left;">
+
+Sqft
+
+</th>
+
+<th style="text-align:left;">
+
+Age
+
+</th>
+
+<th style="text-align:left;">
+
+DaysOnMarket
+
+</th>
+
+<th style="text-align:left;">
+
+PriceSqft
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+Min. :400000
+
+</td>
+
+<td style="text-align:left;">
+
+Min. :438000
+
+</td>
+
+<td style="text-align:left;">
+
+Min. :2
+
+</td>
+
+<td style="text-align:left;">
+
+Min. :709.0
+
+</td>
+
+<td style="text-align:left;">
+
+Min. : 0.000
+
+</td>
+
+<td style="text-align:left;">
+
+Min. : 0.00
+
+</td>
+
+<td style="text-align:left;">
+
+Min. : 455.1
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+1st Qu.:550000
+
+</td>
+
+<td style="text-align:left;">
+
+1st Qu.:573975
+
+</td>
+
+<td style="text-align:left;">
+
+1st Qu.:2
+
+</td>
+
+<td style="text-align:left;">
+
+1st Qu.:811.0
+
+</td>
+
+<td style="text-align:left;">
+
+1st Qu.: 3.000
+
+</td>
+
+<td style="text-align:left;">
+
+1st Qu.: 9.00
+
+</td>
+
+<td style="text-align:left;">
+
+1st Qu.: 664.2
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+Median :602750
+
+</td>
+
+<td style="text-align:left;">
+
+Median :629000
+
+</td>
+
+<td style="text-align:left;">
+
+Median :2
+
+</td>
+
+<td style="text-align:left;">
+
+Median :845.0
+
+</td>
+
+<td style="text-align:left;">
+
+Median : 6.000
+
+</td>
+
+<td style="text-align:left;">
+
+Median : 27.00
+
+</td>
+
+<td style="text-align:left;">
+
+Median : 727.7
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+Mean :619565
+
+</td>
+
+<td style="text-align:left;">
+
+Mean :645807
+
+</td>
+
+<td style="text-align:left;">
+
+Mean :2
+
+</td>
+
+<td style="text-align:left;">
+
+Mean :837.5
+
+</td>
+
+<td style="text-align:left;">
+
+Mean : 7.855
+
+</td>
+
+<td style="text-align:left;">
+
+Mean : 43.29
+
+</td>
+
+<td style="text-align:left;">
+
+Mean : 740.5
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+3rd Qu.:675750
+
+</td>
+
+<td style="text-align:left;">
+
+3rd Qu.:699900
+
+</td>
+
+<td style="text-align:left;">
+
+3rd Qu.:2
+
+</td>
+
+<td style="text-align:left;">
+
+3rd Qu.:870.0
+
+</td>
+
+<td style="text-align:left;">
+
+3rd Qu.:12.000
+
+</td>
+
+<td style="text-align:left;">
+
+3rd Qu.: 57.75
+
+</td>
+
+<td style="text-align:left;">
+
+3rd Qu.: 831.1
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+Max. :880000
+
+</td>
+
+<td style="text-align:left;">
+
+Max. :989000
+
+</td>
+
+<td style="text-align:left;">
+
+Max. :2
+
+</td>
+
+<td style="text-align:left;">
+
+Max. :900.0
+
+</td>
+
+<td style="text-align:left;">
+
+Max. :38.000
+
+</td>
+
+<td style="text-align:left;">
+
+Max. :229.00
+
+</td>
+
+<td style="text-align:left;">
+
+Max. :1017.3
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 ![](realestateanalysis_files/figure-gfm/EDA-1.png)<!-- -->
 
